@@ -5,9 +5,10 @@ import java.util.List;
 
 public class ParcelBox<T extends Parcel> {
 
-    private Integer maxWeight;
+    private final Integer maxWeight;
+    private final List<T> parcels;
+
     private Integer currentWeight;
-    private List<T> parcels;
 
     public ParcelBox(Integer maxWeight) {
         this.maxWeight = maxWeight;
