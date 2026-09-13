@@ -3,9 +3,9 @@ package ru.yandex.practicum.delivery;
 // Скоропортящаяся посылка
 public class PerishableParcel extends Parcel {
 
-    private static final Integer BASE_COST = 4;
+    public static final Integer BASE_COST = 4;
 
-    private Integer timeToLive;
+    private final Integer timeToLive;
 
     public PerishableParcel(
         String description,
@@ -18,10 +18,9 @@ public class PerishableParcel extends Parcel {
         this.timeToLive = timeToLive;
     }
 
-
     @Override
-    public Integer calculateDeliveryCost(){
-        return getWeight() * BASE_COST;
+    public int getBaseCost() {
+        return BASE_COST;
     }
 
     public boolean isExpired(Integer currentDay) {

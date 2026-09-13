@@ -1,11 +1,11 @@
 package ru.yandex.practicum.delivery;
 
-public abstract class Parcel implements Trackable {
+public abstract class Parcel {
 
-    private String description;
-    private Integer weight;
-    private String deliveryAddress;
-    private Integer sendDay;
+    private final String description;
+    private final Integer weight;
+    private final String deliveryAddress;
+    private final Integer sendDay;
 
     public Parcel(String description, Integer weight, String deliveryAddress, Integer sendDay) {
         this.description = description;
@@ -15,8 +15,9 @@ public abstract class Parcel implements Trackable {
     }
 
 
-    public abstract Integer calculateDeliveryCost();
-
+    public Integer calculateDeliveryCost() {
+        return getWeight() * getBaseCost();
+    }
 
     public String getDescription() {
         return description;
@@ -30,16 +31,15 @@ public abstract class Parcel implements Trackable {
         return weight;
     }
 
+    public abstract int getBaseCost();
 
-    public void packageItem(){
+
+    public void packageItem() {
         System.out.println("Посылка " + description + " упакована");
     }
 
-    public void deliver(){
+    public void deliver() {
         System.out.println("Посылка " + description + " доставлена по адресу " + deliveryAddress);
     }
-
-    @Override
-    public void reportStatus(String newLocation){}
 
 }

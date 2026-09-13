@@ -1,9 +1,9 @@
 package ru.yandex.practicum.delivery;
 
 // Хрупкая посылка
-public class FragileParcel extends Parcel {
+public class FragileParcel extends Parcel implements Trackable {
 
-    private static final Integer BASE_COST = 3;
+    public static final Integer BASE_COST = 3;
 
     public FragileParcel(String description, Integer weight, String deliveryAddress, Integer sendDay) {
         super(description, weight, deliveryAddress, sendDay);
@@ -11,14 +11,14 @@ public class FragileParcel extends Parcel {
 
 
     @Override
-    public void packageItem(){
-        System.out.println("Посылка " + getDescription() +" обёрнута в защитную плёнку");
-        super.packageItem();
+    public int getBaseCost() {
+        return BASE_COST;
     }
 
     @Override
-    public Integer calculateDeliveryCost(){
-        return getWeight() * BASE_COST;
+    public void packageItem() {
+        System.out.println("Посылка " + getDescription() + " обёрнута в защитную плёнку");
+        super.packageItem();
     }
 
     @Override
