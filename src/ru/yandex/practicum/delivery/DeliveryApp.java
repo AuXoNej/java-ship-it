@@ -22,26 +22,13 @@ public class DeliveryApp {
             int choice = Integer.parseInt(scanner.nextLine());
 
             switch (choice) {
-                case 1:
-                    addParcel();
-                    break;
-                case 2:
-                    sendParcels();
-                    break;
-                case 3:
-                    calculateCosts();
-                    break;
-                case 4:
-                    reportStatus();
-                    break;
-                case 5:
-                    getBox();
-                    break;
-                case 0:
-                    running = false;
-                    break;
-                default:
-                    System.out.println("Неверный выбор.");
+                case 1 -> addParcel();
+                case 2 -> sendParcels();
+                case 3 -> calculateCosts();
+                case 4 -> reportStatus();
+                case 5 -> getBox();
+                case 0 -> running = false;
+                default -> System.out.println("Неверный выбор.");
             }
         }
     }
@@ -87,7 +74,7 @@ public class DeliveryApp {
         // Посчитать общую стоимость всех доставок и вывести на экран
         System.out.println("Стоимость доставки:");
         for (var parcel : allParcels) {
-            System.out.println("\t" +parcel.getDescription() + ": " + parcel.calculateDeliveryCost());
+            System.out.println("\t" + parcel.getDescription() + ": " + parcel.calculateDeliveryCost());
         }
         System.out.println("Общая стоимость: " + allParcels.stream().mapToInt(Parcel::calculateDeliveryCost).sum() + "\n");
     }
@@ -97,7 +84,11 @@ public class DeliveryApp {
             System.out.println("Введите новое местоположение для посылки " + parcel.getDescription());
             var newLocation = scanner.nextLine();
 
-            parcel.reportStatus(newLocation);
+            if (parcel instanceof Trackable t) {
+                t.reportStatus(newLocation);
+            } else {
+                System.out.println("Тип посылки не поддерживает трекинг");
+            }
         }
     }
 
@@ -136,7 +127,7 @@ public class DeliveryApp {
             (String) fields.get(0),(Integer) fields.get(1), (String) fields.get(2), (Integer) fields.get(3)
         );
 
-        if (boxFragileParcel.addParcel(fragileParcel)){
+        if (boxFragileParcel.addParcel(fragileParcel)) {
             allParcels.add(fragileParcel);
             trackableParcels.add(fragileParcel);
         }
